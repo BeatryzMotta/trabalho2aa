@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Celular com Rolagem de Produtos</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+   .telefone {
+    width: 300px;
+    height: 600px;
+    background-color: #141414;
+    border-radius: 30px;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0px 0px 20px rgba(250, 249, 253, 0.3);
+  }
+  
+  .tela {
+    width: 270px;
+    height: 530px;
+    top: -4%;
+    position: absolute;
+    background-color: #ffffff;
+    margin: 35px 15px;
+    border-radius: 15px;
+  }
+  
+  .botoens {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+  }
+  
+  .botao {
+    width: 20px;
+    height: 20px;
+    background-color: #302f2f;
+    border-radius: 50%;
+  }
+   .speaker {
+    width: 40px;
+    height: 5px;
+    background-color: #4c4d4a;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+    .botao:hover {
+      background-color: #aaa;
+    }
+
+     .voltar{
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      text-decoration: none;
+      position: relative;
+      background: linear-gradient(to bottom right, #ee0a8b, #ee0a38);
+      color: #e9e6e6;
+      padding: 0 10px 0 10px;
+      margin: 0 10px 0 10px;
+      top: -2%;
+      border-radius: 15px;
+    }
+    /* Retângulo de produto */
+    .produto-container {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      border-radius: 12px;
+      border: 1px solid #FF6A00;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      gap: 10px;
+      margin-bottom: 20px; /* espaço entre retângulos */
+      animation: aparecer 0.6s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .produto-img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .produto-titulo {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .avaliacao {
+      color: #FFA500;
+      font-size: 14px;
+    }
+
+    .detalhes {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .preco {
+      font-size: 18px;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .preco-pix {
+      color: green;
+      font-size: 15px;
+    }
+
+    .botao-compra {
+      margin-top: 10px;
+      background-color: #FF6A00;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .botao-compra:hover {
+      background-color: #e85c00;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="telefone">
+    <div class="tela">
+      
+      <!-- Produto 1 -->
+      <div class="produto-container">
+        <div class="produto-titulo">Micro-ondas Brastemp 32 Litros cor Inox Espelhado com Grill
+             e Painel Integrado - BMG45AR • 110V</div>
+        <div class="avaliacao">⭐ 4.6 (603 avaliações)</div>
+        <div class="detalhes">
+        </div>
+        <div class="preco">R$ 4.036,55 <span class="preco-pix">(5% off no Pix)</span></div>
+        <button class="botao-compra">Aproveite</button>
+      </div>
+
+      <!-- Produto 2 -->
+      <div class="produto-container">
+        <div class="produto-titulo">Micro-ondas Brastemp de Embutir 32 Litros Preto com 18 
+            Receitas Pré-Programadas e Design Sofisticado - BM146AE • 110V</div>
+        <div class="avaliacao">⭐ 4.6 (233 avaliações)</div>
+        <div class="detalhes">
+        </div>
+        <div class="preco">R$ 1.464,00 <span class="preco-pix">(9% off no Pix)</span></div>
+        <button class="botao-compra">Aproveite</button>
+      </div>
+      <a href="./index.html" style="text-decoration: none;">
+        <button class="voltar">
+            Voltar
+        </button>
+      </a>
+
+    </div>
+
+    <div class="botoens">
+      <div class="botao"></div>
+      <div class="botao"></div>
+      <div class="botao"></div>
+    </div>
+
+    <div class="camera"></div>
+    <div class="speaker"></div>
+  </div>

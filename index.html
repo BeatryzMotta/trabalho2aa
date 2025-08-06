@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho 2AA</title>
+    <link rel="stylesheet" href="cel.css">
+</head>
+<body>
+    <div class="telefone">
+        <div class="tela">
+             <div class="logo"> <h1>Brastemp</h1> </div>
+             <img src="entrada.PNG" alt="" style="position: relative; top: -5%;" width="270" height="90">
+
+
+             <!--carrosel-->
+           <div class="carrossel-container">
+    <button class="seta esquerda" onclick="slideAnterior()">&#10094;</button>
+    <div class="carrossel" id="carrossel">
+      <div class="slide">
+        <a href="./lava.louca.html" target="_blank">
+          <img src="./lava louça.PNG" alt="Lavadora" 
+          style="border-radius: 15px; margin: 0 20px 0 20px; width: 60px;" />
+          <p>Seu tempo lavando a sério.</p>
+        </a>
+      </div>
+      <div class="slide">
+        <a href="./fogão.html" target="_blank">
+          <img src="fogão.PNG" alt="Fogão"
+          style="border-radius: 15px; margin: 0 20px 0 20px;" />
+          <p>Potência para explorar possibilidades.</p>
+        </a>
+      </div>
+      <div class="slide">
+        <a href="./micro.ondas.html" target="_blank">
+          <img src="micro-ondas.PNG" alt="Micro-ondas"
+          style="border-radius: 15px; margin: 0 20px 0 20px;" />
+          <p>Tudo em um.</p>
+        </a>
+      </div>
+      <div class="slide">
+        <a href="./lava.seca.html" target="_blank">
+          <img src="lava.PNG" alt="Lava e seca"
+           style="border-radius: 15px; margin: 0 20px 0 20px;" width="50"/>
+          <p>Livre, leve e seca.</p>
+        </a>
+      </div>
+    </div>
+    <button class="seta direita" onclick="proximoSlide()">&#10095;</button>
+
+    <div class="indicadores">
+      <div class="indicador ativo" onclick="moverParaSlide(0)"></div>
+      <div class="indicador" onclick="moverParaSlide(1)"></div>
+      <div class="indicador" onclick="moverParaSlide(2)"></div>
+      <div class="indicador" onclick="moverParaSlide(3)"></div>
+    </div>
+  </div>
+
+  <script>
+    const carrossel = document.getElementById('carrossel');
+    const indicadores = document.querySelectorAll('.indicador');
+    let slideAtual = 0;
+    const totalSlides = indicadores.length;
+
+    function moverParaSlide(index) {
+      slideAtual = index;
+      carrossel.style.transform = `translateX(-${index * 25}%)`;
+      atualizarIndicadores();
+    }
+
+    function atualizarIndicadores() {
+      indicadores.forEach((indicador, i) => {
+        indicador.classList.toggle('ativo', i === slideAtual);
+      });
+    }
+
+    function proximoSlide() {
+      slideAtual = (slideAtual + 1) % totalSlides;
+      moverParaSlide(slideAtual);
+    }
+
+    function slideAnterior() {
+      slideAtual = (slideAtual - 1 + totalSlides) % totalSlides;
+      moverParaSlide(slideAtual);
+    }
+
+    setInterval(() => {
+      proximoSlide();
+    }, 5000);
+  </script>
+
+           <img src="famili.PNG" alt="" width="150" height="210">
+           <img src="empurq.PNG" alt="" width="130" height="210" 
+           style=" position: absolute; margin: auto; bottom: 0; left: 52%; display: flex; top: 43%; border-radius: 5px; ">
+           <a href="./sistema.html">
+            <button class="botao3"> Assistente Virtual  </button>
+           </a>
+            
+        </div>
+        <div class="botoens">
+        <div class="botao"></div>
+          <div class="botao"></div>
+          <div class="botao"></div>
+    </div>
+        <div class="camera"></div>
+        <div class="speaker"></div>
+    </div>
+    
+</body>
+</html>

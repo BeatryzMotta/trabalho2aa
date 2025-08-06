@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>assistente virtual</title>
+    <link rel="stylesheet" href="sis.css">
+</head>
+<body>
+    <div class="telefone">
+        <div class="tela">
+              <h1> Assistente Virtual</h1>
+              <a href="./index.html" style="text-decoration: none;"><button class="voltar" style="text-decoration: none;">voltar</button></a>
+
+  <div class="input-area">
+    <input type="text" id="comando" placeholder="Ex: ligar luz da sala">
+    <div class="top-buttons">
+      <button onclick="interpretarComando()">Enviar</button>
+      <button onclick="reconhecerVoz()">🎤 Voz</button>
+    </div>
+  </div>
+
+  <div class="devices" id="lista-dispositivos">
+    <!-- Dispositivos serão adicionados aqui via JavaScript -->
+  </div>
+
+  <script>
+    const dispositivos = [
+      "luz da sala",
+      "luz da cozinha",
+      "luz do banheiro",
+      "luz do quarto",
+      "ar-condicionado",
+      "regador do jardim",
+      "cafeteira"
+    ];
+
+    function criarDispositivo(nome) {
+      const div = document.createElement("div");
+      div.className = "device off";
+      div.dataset.nome = nome;
+
+      const nomeSpan = document.createElement("span");
+      nomeSpan.className = "device-name";
+      nomeSpan.textContent = nome;
+
+      const botoes = document.createElement("div");
+      botoes.className = "device-buttons";
+
+      const btnLigar = document.createElement("button");
+      btnLigar.textContent = "Ligar";
+      btnLigar.onclick = () => ligarOuDesligar(nome, true);
+
+      const btnDesligar = document.createElement("button");
+      btnDesligar.textContent = "Desligar";
+      btnDesligar.onclick = () => ligarOuDesligar(nome, false);
+
+      botoes.appendChild(btnLigar);
+      botoes.appendChild(btnDesligar);
+
+      div.appendChild(nomeSpan);
+      div.appendChild(botoes);
+
+      return div;
+    }
+
+    function inicializarDispositivos() {
+      const container = document.getElementById("lista-dispositivos");
+      dispositivos.forEach(nome => {
+        const dispositivo = criarDispositivo(nome);
+        container.appendChild(dispositivo);
+      });
+    }
+
+    function normalizar(texto) {
+      return texto
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s]/gi, "")
+        .trim();
+    }
+
+    function ligarOuDesligar(nomeDispositivo, ligar) {
+      const todos = document.querySelectorAll('.device');
+      todos.forEach(dispositivo => {
+        const nome = normalizar(dispositivo.dataset.nome);
+        if (nome === normalizar(nomeDispositivo)) {
+          dispositivo.classList.remove("on", "off");
+          dispositivo.classList.add(ligar ? "on" : "off");
+        }
+      });
+    }
+
+    function interpretarComandoTexto(comando) {
+      const texto = normalizar(comando);
+      const isLigar = texto.includes("ligar");
+      const isDesligar = texto.includes("desligar") || texto.includes("deligar") || texto.includes("desliga");
+
+      if (!isLigar && !isDesligar) {
+        alert("Use os comandos 'ligar' ou 'desligar' com o nome do dispositivo.");
+        return;
+      }
+
+      const encontrado = dispositivos.find(dispositivo =>
+        texto.includes(normalizar(dispositivo))
+      );
+
+      if (encontrado) {
+        ligarOuDesligar(encontrado, isLigar);
+      } else {
+        alert("Dispositivo não encontrado.");
+      }
+    }
+
+    function interpretarComando() {
+      const comando = document.getElementById("comando").value;
+      interpretarComandoTexto(comando);
+    }
+
+    function reconhecerVoz() {
+      const reconhecimento = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      reconhecimento.lang = 'pt-BR';
+      reconhecimento.start();
+
+      reconhecimento.onresult = function(event) {
+        const comandoVoz = event.results[0][0].transcript;
+        document.getElementById("comando").value = comandoVoz;
+        interpretarComandoTexto(comandoVoz);
+      };
+
+      reconhecimento.onerror = function(event) {
+        alert("Erro no reconhecimento de voz: " + event.error);
+      };
+    }
+
+    // Iniciar dispositivos ao carregar
+    inicializarDispositivos();
+  </script>
+              </div>
+        <div class="botoens">
+        <div class="botao"></div>
+          <div class="botao"></div>
+          <div class="botao"></div>
+    </div>
+        <div class="camera"></div>
+        <div class="speaker"></div>
+    </div>
+    
+</body>
+</html>
